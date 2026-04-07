@@ -1,12 +1,15 @@
 "use client"
-import { useState,useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/libs/data";
+import { usePathname, useRouter } from "next/navigation";
 
 const NavBar = () => {
      const [isOpen, setIsOpen] = useState(false);
      const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -20,6 +23,17 @@ const NavBar = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setIsOpen(false);
+      return;
+    }
+
+    if (href.startsWith("#")) {
+      const target = `/${href}`;
+      if (pathname !== "/") {
+        router.push(target);
+      } else {
+        window.location.hash = href;
+      }
+      setIsOpen(false);
     }
   };
 
@@ -28,12 +42,12 @@ const NavBar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || isOpen ? "bg-slate-900/90 backdrop-blur-md border-b border-white/10" : "bg-transparent"
+        scrolled || isOpen ? "bg-white/80 backdrop-blur-md border-b border-slate-200" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20">
-          <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="text-xl md:text-2xl font-bold text-white tracking-tight">
+          <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">
             Farok<span className="text-blue-500">Ahmed</span>
           </a>
 
@@ -44,7 +58,7 @@ const NavBar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                className="text-slate-300 hover:text-white transition-colors text-sm font-medium"
+                className="text-slate-600 hover:text-slate-900 transition-colors text-sm font-medium"
               >
                 {link.name}
               </a>
@@ -53,7 +67,7 @@ const NavBar = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-white p-2"
+            className="md:hidden text-slate-900 p-2"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X /> : <Menu />}
@@ -68,7 +82,7 @@ const NavBar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-slate-900 border-b border-white/10 overflow-hidden"
+            className="md:hidden bg-white border-b border-slate-200 overflow-hidden"
           >
             <div className="px-4 py-4 space-y-4">
               {NAV_LINKS.map((link) => (
@@ -76,7 +90,7 @@ const NavBar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => scrollToSection(e, link.href)}
-                  className="block text-slate-300 hover:text-white font-medium"
+                  className="block text-slate-600 hover:text-slate-900 font-medium"
                 >
                   {link.name}
                 </a>

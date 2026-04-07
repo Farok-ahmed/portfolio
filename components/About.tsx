@@ -1,7 +1,8 @@
 
 "use client"
 import { motion } from "framer-motion";
-import { CheckCircle2, Code2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 import Section from "./Section";
 const About = () => {
   return (
@@ -13,29 +14,42 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
             About Me
           </h2>
-          <div className="space-y-4 text-slate-400 text-lg leading-relaxed mb-8">
+          <div className="space-y-4 text-slate-600 text-lg leading-relaxed mb-8">
             <p>
-              I'm Farok, a dedicated developer who bridges the gap between traditional WordPress content management and modern React frontends. 
+              Hi, I’m Farok Ahmed, a professional React and Next.js developer and WordPress expert based in Bangladesh. I specialize in building fast, modern, and scalable websites using React, Next.js, WordPress, WooCommerce, Elementor, and Gutenberg.
             </p>
             <p>
-              Whether it's building custom plugins for agency clients or creating high-performance SaaS landing pages, I love solving technical challenges that help businesses grow.
+             With strong experience in both frontend and CMS development, I help businesses create high-performance websites, custom WordPress solutions, and conversion-focused landing pages.
             </p>
           </div>
 
           <div className="space-y-3">
             {[
-              "Experience with Gutenberg block development",
-              "Custom Elementor widgets & layouts",
-              "Next.js landing pages & business sites"
+              "Custom Gutenberg block development",
+              "Elementor website design & customization",
+              "WooCommerce store development",
+              "React & Next.js landing pages",
+              "Modern, fast & SEO-friendly websites"
+
             ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 text-slate-300">
+              <div key={i} className="flex items-center gap-3 text-slate-700">
                 <CheckCircle2 className="text-blue-500 w-5 h-5 flex-shrink-0" />
                 <span>{item}</span>
               </div>
             ))}
+          </div>
+
+          <div className="mt-10">
+            <button
+              type="button"
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-500 transition-colors"
+            >
+              Contact Me
+            </button>
           </div>
         </motion.div>
         
@@ -46,23 +60,28 @@ const About = () => {
           transition={{ duration: 0.5 }}
           className="relative"
         >
-          <div className="aspect-square rounded-2xl overflow-hidden bg-slate-800 border border-white/10 relative group shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent z-10" />
+          <div className="aspect-square rounded-2xl overflow-hidden bg-white border border-slate-200 relative group shadow-xl shadow-slate-900/5">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 to-transparent z-10" />
             
-            {/* Placeholder for Photo/Illustration */}
-            <div className="w-full h-full flex items-center justify-center bg-slate-900">
-               <div className="relative">
-                  <div className="absolute -inset-4 bg-blue-500/20 rounded-full blur-xl" />
-                  <Code2 size={120} className="text-slate-700 relative z-10" />
-               </div>
+            {/* Profile Photo */}
+            <div className="absolute inset-0 bg-slate-50">
+              <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white/60" />
+              <div className="absolute inset-0">
+                <Image
+                  src="/farok_ahmed.png"
+                  alt="Farok Ahmed"
+                  fill
+                  sizes="(min-width: 768px) 420px, 90vw"
+                  className="object-contain object-bottom"
+                  priority={false}
+                />
+              </div>
             </div>
             
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-900 to-transparent z-20">
-              <p className="text-white font-medium text-center">Let's build something scalable.</p>
-            </div>
+            
           </div>
           {/* Decorative elements */}
-          <div className="absolute -top-6 -right-6 w-32 h-32 border-2 border-dashed border-slate-700 rounded-full animate-spin-slow" />
+          <div className="absolute -top-6 -right-6 w-32 h-32 border-2 border-dashed border-slate-300 rounded-full animate-spin-slow" />
         </motion.div>
       </div>
     </Section>

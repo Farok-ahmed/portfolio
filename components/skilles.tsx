@@ -7,30 +7,30 @@ const Skills = () => {
 const SKILLS = [
   { 
     category: "Frontend", 
-    icon: <Code2 className="text-blue-400" />,
+    icon: <Code2 className="text-blue-600" />,
     items: ["React", "Next.js", "JavaScript (ES6+)", "HTML5", "CSS3", "TailwindCSS", "Sass"] 
   },
   { 
     category: "WordPress", 
-    icon: <Layout className="text-purple-400" />,
+    icon: <Layout className="text-purple-600" />,
     items: ["Gutenberg Blocks", "Elementor Customizer", "Custom Themes", "Plugin Development", "Headless WP"] 
   },
   { 
     category: "Backend & Tools", 
-    icon: <Terminal className="text-emerald-400" />,
+    icon: <Terminal className="text-emerald-600" />,
     items: ["PHP", "REST API", "Git/GitHub", "VS Code", "Figma", "Vercel", "Node.js"] 
   },
 ];
   return (
-    <Section id="skills" className="bg-slate-900/50">
+    <Section id="skills" className="">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Skills & Stack</h2>
-        <p className="text-slate-400 max-w-2xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Skills & Stack</h2>
+        <p className="text-slate-600 max-w-2xl mx-auto">
           A hybrid tech stack focused on performance and flexibility.
         </p>
       </motion.div>
@@ -43,20 +43,20 @@ const SKILLS = [
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="bg-slate-800/50 border border-white/5 rounded-2xl p-8 hover:border-blue-500/30 transition-all group"
+            className="bg-white border border-slate-200 rounded-2xl p-8 hover:border-blue-500/40 transition-all group shadow-sm"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-slate-900 rounded-lg group-hover:scale-110 transition-transform">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg group-hover:scale-110 transition-transform">
                 {group.icon}
               </div>
-              <h3 className="text-xl font-bold text-white">{group.category}</h3>
+              <h3 className="text-xl font-bold text-slate-900">{group.category}</h3>
             </div>
             
             <div className="flex flex-wrap gap-2">
               {group.items.map((skill) => (
                 <span
                   key={skill}
-                  className="px-3 py-1 bg-white/5 text-slate-300 rounded-md text-sm border border-white/5 group-hover:bg-white/10 transition-colors"
+                  className="px-3 py-1 bg-slate-50 text-slate-700 rounded-md text-sm border border-slate-200 group-hover:bg-white transition-colors"
                 >
                   {skill}
                 </span>
@@ -64,7 +64,7 @@ const SKILLS = [
             </div>
             
             {index === 1 && (
-               <p className="mt-6 text-sm text-slate-500 italic">"Custom Gutenberg blocks with React & WP scripts."</p>
+              <p className="mt-6 text-sm text-slate-500 italic">&quot;Custom Gutenberg blocks with React &amp; WP scripts.&quot;</p>
             )}
           </motion.div>
         ))}
