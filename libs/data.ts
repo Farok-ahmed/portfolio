@@ -21,6 +21,7 @@ export type BlogPost = {
   date: string;
   readTime: string;
   tags: string[];
+  faq?: Array<{ question: string; answer: string }>;
   content: Array<
     | { type: "p"; text: string }
     | { type: "h2"; text: string }
@@ -123,6 +124,125 @@ const PROJECTS: Project[] = [
 ];
 
 const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "best-react-js-developer-in-bangladesh",
+    image: "/blog-images/best-react-js-developer-in-bangladesh.png",
+    title: "Best React JS Developer in Bangladesh: how to choose (and how I work)",
+    excerpt:
+      "Searching for the best React JS developer in Bangladesh? Here’s a practical checklist, my React + Next.js workflow, and how I deliver fast, SEO-friendly websites.",
+    date: "Apr 8, 2026",
+    readTime: "6 min read",
+    tags: ["React", "Next.js", "Bangladesh", "Hiring", "SEO"],
+    faq: [
+      {
+        question: "Do you build SEO-friendly Next.js websites?",
+        answer:
+          "Yes. I focus on clean metadata (titles/descriptions/canonical), fast performance (Core Web Vitals), structured data when appropriate, and a content structure that’s easy for users (and search engines) to scan.",
+      },
+      {
+        question: "What kind of React/Next.js work do you take?",
+        answer:
+          "Landing pages, portfolio sites, dashboards, marketing sites, and content-focused websites using Next.js App Router. I also help teams improve performance, code structure, and DX in existing apps.",
+      },
+      {
+        question: "How long does a typical project take?",
+        answer:
+          "It depends on scope. A small marketing site can be done in days, while a larger app may take weeks. I usually start by clarifying pages, components, integrations, and performance/SEO requirements before giving a timeline.",
+      },
+      {
+        question: "Can you work with a designer or existing UI?",
+        answer:
+          "Yes. I can implement Figma designs, improve existing UI, and make sure the site stays responsive, accessible, and maintainable.",
+      },
+    ],
+    content: [
+      {
+        type: "p",
+        text:
+          "If you searched for “Best React JS developer in Bangladesh”, you’re probably trying to ship a product quickly without sacrificing quality. In this post I’ll share a simple checklist for hiring — and I’ll also explain how I work with React + Next.js to deliver fast, SEO-friendly websites.",
+      },
+      { type: "h2", text: "What “best” actually means (for real projects)" },
+      {
+        type: "p",
+        text:
+          "In production, “best” isn’t about fancy animations or over-engineering. A strong React developer should ship features that are easy to maintain, fast to load, and predictable to change later.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Maintainability: clean components, consistent patterns, sensible folder structure.",
+          "Performance: good Core Web Vitals and minimal client-side bloat.",
+          "Accessibility: keyboard-friendly UI, readable semantics, good contrast.",
+          "Reliability: predictable state management and safe data fetching.",
+          "Communication: clear updates, realistic timelines, and clean handover.",
+        ],
+      },
+      { type: "h2", text: "My stack for React + Next.js work" },
+      {
+        type: "p",
+        text:
+          "For most websites and content-driven apps, Next.js App Router is a great fit. It encourages server-first rendering, which helps both performance and SEO by default.",
+      },
+      {
+        type: "ul",
+        items: [
+          "React + Next.js (App Router)",
+          "Server Components by default; Client Components only when needed",
+          "TypeScript for safer refactors and better DX",
+          "Metadata + OpenGraph/Twitter images + structured data for SEO",
+          "Performance-first UI (reduce JS, optimize images, predictable layouts)",
+        ],
+      },
+      {
+        type: "code",
+        language: "txt",
+        code:
+          "app/\n  layout.tsx\n  page.tsx\n  blog/\n    page.tsx\n    [slug]/page.tsx\ncomponents/\n  ...\nlibs/\n  data.ts",
+      },
+      { type: "h2", text: "How I run a project" },
+      {
+        type: "ul",
+        items: [
+          "Scope first: pages, components, integrations, and deployment target.",
+          "Build UI structure: reusable components and consistent spacing/typography.",
+          "Implement features: data fetching, forms, validation, and error states.",
+          "Polish performance: remove unnecessary JS, optimize images, avoid layout shifts.",
+          "SEO pass: titles/descriptions, canonical URLs, OpenGraph, schema, sitemap/robots.",
+        ],
+      },
+      { type: "h2", text: "What you get if you hire me" },
+      {
+        type: "p",
+        text:
+          "I focus on shipping production-ready work: clean code, fast pages, and a setup you can maintain without fear. If your goal is a site that performs well on mobile in Bangladesh, performance is non-negotiable.",
+      },
+      {
+        type: "ul",
+        items: [
+          "A fast, responsive React/Next.js build",
+          "SEO-ready pages (metadata, structured content, share images)",
+          "Clean component architecture for future changes",
+          "Clear handover: project structure + guidance on content updates",
+        ],
+      },
+      {
+        type: "quote",
+        text:
+          "Great React work feels boring: fast, stable, and easy to change.",
+      },
+      { type: "h2", text: "Quick hiring checklist (Bangladesh)" },
+      {
+        type: "ul",
+        items: [
+          "Ask for 2–3 real projects and check performance on mobile.",
+          "Ask how they handle SEO for Next.js (metadata, canonical, sitemap, structured data).",
+          "Ask how they keep JavaScript bundle size under control.",
+          "Ask how they structure components and avoid duplicated UI logic.",
+          "Ask for a short plan and milestones — not just a single delivery date.",
+        ],
+      },
+    ],
+  },
   {
     slug: "building-fast-landing-pages-with-nextjs-app-router",
     image: "/blog-images/building-fast-landing-pages-with-nextjs-app-router.png",

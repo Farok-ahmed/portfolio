@@ -16,6 +16,18 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Environment variables
+
+Copy `.env.example` to `.env.local` and set values.
+
+- `NEXT_PUBLIC_SITE_URL` (example: `https://farok.me`) is used for `metadataBase`, `sitemap.xml`, and `robots.txt`
+- `EMAIL_USER` and `EMAIL_PASS` are used by the contact form API
+
+After setting env vars, you can verify:
+
+- Local: `http://localhost:3000/sitemap.xml` and `http://localhost:3000/robots.txt`
+- Production: `https://farok.me/sitemap.xml` and `https://farok.me/robots.txt`
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import Image from "next/image";
+import Logo from "@/public/farok_ahmed_logo.png";
 
 const Footer = () => (
   <footer className="border-t border-slate-200 bg-slate-50">
@@ -13,15 +14,10 @@ const Footer = () => (
             aria-label="Go to home"
           >
             <Image
-              src="/farok_ahmed_log.png"
+              src={Logo}
               alt="Farok Ahmed"
-              width={36}
-              height={36}
-              className="h-9 w-9 rounded"
+              className="rounded"
             />
-            <span>
-              Farok<span className="text-blue-600">Ahmed</span>
-            </span>
           </Link>
           <p className="mt-2 text-sm text-slate-600">
             React, Next.js &amp; WordPress Developer

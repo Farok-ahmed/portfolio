@@ -58,7 +58,7 @@ const NavBar = () => {
             <Image
               src={Logo}
               alt="Farok Ahmed"
-              className="h-9 w-9 rounded"
+              className="rounded"
               priority
             />
             

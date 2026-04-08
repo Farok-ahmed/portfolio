@@ -18,7 +18,8 @@ function getPostBySlug(slug: string) {
 const AUTHOR_NAME = "Farok Ahmed";
 
 function getSiteUrl() {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  return raw.endsWith("/") ? raw.slice(0, -1) : raw;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -80,6 +81,8 @@ export default async function BlogPostPage({ params }: PageProps) {
   const publishedDate = new Date(post.date);
   const publishedIso = Number.isNaN(publishedDate.getTime()) ? undefined : publishedDate.toISOString();
 
+  const imageUrl = new URL(`/blog/${post.slug}/opengraph-image`, getSiteUrl()).toString();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -91,8 +94,24 @@ export default async function BlogPostPage({ params }: PageProps) {
     },
     url: postUrl,
     mainEntityOfPage: postUrl,
+    image: [imageUrl],
     ...(publishedIso ? { datePublished: publishedIso } : {}),
   };
+
+  const faqJsonLd = post.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-200 selection:text-slate-900">
@@ -102,6 +121,13 @@ export default async function BlogPostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {faqJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      ) : null}
 
       <main className="pt-20">
         <Section id="blog-post" className="py-14 md:py-20">
@@ -212,8 +238,44 @@ export default async function BlogPostPage({ params }: PageProps) {
                   return null;
                 })}
               </div>
+
+              {post.faq?.length ? (
+                <div className="mt-12 pt-10 border-t border-slate-200">
+                  <h2 className="text-2xl md:text-3xl font-bold text-slate-900">FAQ</h2>
+                  <div className="mt-6 space-y-6">
+                    {post.faq.map((item) => (
+                      <div key={item.question} className="rounded-xl bg-slate-50 border border-slate-200 p-5">
+                        <p className="font-bold text-slate-900">{item.question}</p>
+                        <p className="mt-2 text-slate-700 leading-relaxed">{item.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </div>
           </article>
+
+          <div className="mt-8 rounded-2xl bg-slate-50 border border-slate-200 p-7 md:p-10">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900">Want to build something with React + Next.js?</h2>
+            <p className="mt-3 text-slate-700 max-w-2xl">
+              If you’re looking for a React/Next.js developer in Bangladesh for a fast, SEO-friendly website,
+              tell me a bit about your project.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/#contact"
+                className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-white border border-slate-200 text-slate-900 font-semibold hover:bg-slate-50 transition-colors"
+              >
+                Contact me
+              </Link>
+              <Link
+                href="/projects"
+                className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors"
+              >
+                See projects
+              </Link>
+            </div>
+          </div>
         </Section>
       </main>
 
