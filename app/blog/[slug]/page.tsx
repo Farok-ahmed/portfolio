@@ -6,6 +6,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import Section from "@/components/Section";
 import { BLOG_POSTS } from "@/libs/data";
+import { getSiteUrl } from "@/libs/site";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -16,11 +17,6 @@ function getPostBySlug(slug: string) {
 }
 
 const AUTHOR_NAME = "Farok Ahmed";
-
-function getSiteUrl() {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  return raw.endsWith("/") ? raw.slice(0, -1) : raw;
-}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;

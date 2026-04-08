@@ -1,11 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { BLOG_POSTS } from "@/libs/data";
-
-function getSiteUrl() {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  return raw.endsWith("/") ? raw.slice(0, -1) : raw;
-}
+import { getSiteUrl } from "@/libs/site";
 
 function safeDate(dateText: string) {
   const d = new Date(dateText);
