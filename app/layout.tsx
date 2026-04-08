@@ -13,8 +13,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Farok Ahmed",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  title: {
+    default: "Farok Ahmed",
+    template: "%s | Farok Ahmed",
+  },
   description: "Md Farok Ahmed - Portfolio",
+  icons: {
+    icon: [{ url: "/farok_ahmed_log.png", type: "image/png" }],
+    shortcut: [{ url: "/farok_ahmed_log.png", type: "image/png" }],
+    apple: [{ url: "/farok_ahmed_log.png", type: "image/png" }],
+  },
+  openGraph: {
+    title: "Farok Ahmed",
+    description: "Md Farok Ahmed - Portfolio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "Farok Ahmed",
+  },
 };
 
 export default function RootLayout({

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -49,7 +50,18 @@ export default function BlogPage() {
                 transition={{ delay: index * 0.05 }}
                 className="group rounded-2xl bg-white border border-slate-200 hover:border-blue-500/40 transition-colors shadow-sm overflow-hidden"
               >
-                <div className="h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600" />
+                <Link href={`/blog/${post.slug}`} aria-label={`Open article: ${post.title}`}>
+                  <div className="relative w-full aspect-[16/9] bg-slate-50">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      priority={index === 0}
+                    />
+                  </div>
+                </Link>
 
                 <div className="p-8">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-semibold text-slate-500">
@@ -61,7 +73,9 @@ export default function BlogPage() {
                   </div>
 
                   <h2 className="mt-4 text-xl md:text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
-                    {post.title}
+                    <Link href={`/blog/${post.slug}`} className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+                      {post.title}
+                    </Link>
                   </h2>
 
                   <p className="mt-3 text-slate-600 font-medium">{post.excerpt}</p>
@@ -75,6 +89,16 @@ export default function BlogPage() {
                         {tag}
                       </span>
                     ))}
+                  </div>
+
+                  <div className="mt-7">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-800 font-semibold hover:bg-white transition-colors"
+                      aria-label={`Read article: ${post.title}`}
+                    >
+                      Read article
+                    </Link>
                   </div>
                 </div>
               </motion.article>

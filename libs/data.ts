@@ -14,11 +14,20 @@ export type Project = {
 };
 
 export type BlogPost = {
+  slug: string;
+  image: string;
   title: string;
   excerpt: string;
   date: string;
   readTime: string;
   tags: string[];
+  content: Array<
+    | { type: "p"; text: string }
+    | { type: "h2"; text: string }
+    | { type: "ul"; items: string[] }
+    | { type: "code"; code: string; language?: string }
+    | { type: "quote"; text: string }
+  >;
 };
 const NAV_LINKS: NavLink[] = [
   { name: "Home", href: "#home" },
@@ -115,20 +124,109 @@ const PROJECTS: Project[] = [
 
 const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "building-fast-landing-pages-with-nextjs-app-router",
+    image: "/blog-images/building-fast-landing-pages-with-nextjs-app-router.png",
     title: "Building fast landing pages with Next.js (App Router)",
     excerpt:
       "How I structure pages, components, and performance-friendly patterns in Next.js so marketing sites stay fast, clean, and easy to maintain.",
     date: "Apr 8, 2026",
     readTime: "4 min read",
     tags: ["Next.js", "React", "Performance"],
+    content: [
+      {
+        type: "p",
+        text:
+          "When I'm building a landing page or portfolio, my main goal is simple: keep the UI clean, the codebase easy to change, and the page fast even on low-end devices. Next.js (App Router) is great for this because server components are the default and the routing model is straightforward.",
+      },
+      { type: "h2", text: "My default structure" },
+      {
+        type: "p",
+        text:
+          "I keep page composition in the app route, UI pieces in components, and static configuration/data in a small libs folder. That way, I can iterate on content without touching layout logic.",
+      },
+      {
+        type: "code",
+        language: "txt",
+        code:
+          "app/\n  page.tsx\n  blog/\n    page.tsx\n    [slug]/page.tsx\ncomponents/\n  NavBar.tsx\n  Footer.tsx\nlibs/\n  data.ts",
+      },
+      { type: "h2", text: "Performance checklist I follow" },
+      {
+        type: "ul",
+        items: [
+          "Use server components by default; add \"use client\" only when needed (animations, state, event handlers).",
+          "Keep data shaping in one place (like libs/data.ts) so pages stay simple.",
+          "Prefer static rendering for content pages (blog posts, landing pages) when possible.",
+          "Avoid heavy client-side libraries in global layout; load them only on pages that need them.",
+          "Keep above-the-fold content tight: strong heading, short copy, clear CTA.",
+        ],
+      },
+      { type: "h2", text: "Small UX details that matter" },
+      {
+        type: "p",
+        text:
+          "Speed isn't just about Lighthouse. Consistent spacing, readable typography, and clear navigation reduce bounce rate. I usually add a short excerpt, visible tags, and a simple back link so users can browse quickly.",
+      },
+      {
+        type: "quote",
+        text:
+          "If a page is easy to scan, it feels faster — even before you measure it.",
+      },
+    ],
   },
   {
+    slug: "creating-custom-gutenberg-blocks-with-react",
+    image: "/blog-images/creating-custom-gutenberg-blocks-with-react.png",
     title: "Creating custom Gutenberg blocks with React",
     excerpt:
       "A practical overview of building Gutenberg blocks: choosing the right block structure, keeping UI reusable, and integrating with real-world WordPress plugins.",
     date: "Apr 8, 2026",
     readTime: "5 min read",
     tags: ["WordPress", "Gutenberg", "React"],
+    content: [
+      {
+        type: "p",
+        text:
+          "Gutenberg blocks are just React components with a WordPress-flavored lifecycle. The key is to keep the block UI predictable, store the right attributes, and ship it in a plugin structure that's easy to maintain.",
+      },
+      { type: "h2", text: "Block anatomy (what I always start with)" },
+      {
+        type: "ul",
+        items: [
+          "block.json: block name, title, category, attributes, editorScript/style.",
+          "Edit component: editor-only UI (controls, previews, placeholders).",
+          "Save function: front-end markup output (or use dynamic/PHP render when needed).",
+          "Attributes: store the minimum data needed to reproduce the output.",
+        ],
+      },
+      {
+        type: "code",
+        language: "json",
+        code:
+          "{\n  \"apiVersion\": 2,\n  \"name\": \"my-plugin/feature-card\",\n  \"title\": \"Feature Card\",\n  \"category\": \"widgets\",\n  \"attributes\": {\n    \"title\": { \"type\": \"string\", \"default\": \"\" },\n    \"description\": { \"type\": \"string\", \"default\": \"\" }\n  },\n  \"supports\": { \"html\": false }\n}",
+      },
+      { type: "h2", text: "Reusable UI patterns" },
+      {
+        type: "p",
+        text:
+          "For real projects, you don't want every block to re-implement the same inspector controls, field components, or layout helpers. I typically extract small UI components (inputs, toggles, color pickers) and keep block-specific logic in the block folder.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Create small UI primitives (TextControl wrappers, ToggleControl wrappers).",
+          "Share utility hooks (e.g., safe attribute updates, debounced input).",
+          "Keep markup and styling consistent across blocks.",
+          "Plan attributes carefully so saved content remains stable over time.",
+        ],
+      },
+      { type: "h2", text: "Shipping inside a plugin" },
+      {
+        type: "p",
+        text:
+          "In production, the most important part is maintainability: clear folder structure, versioned builds, and predictable registration. Once you do that, scaling from 1 block to 20 blocks becomes a tooling problem—not a code mess.",
+      },
+    ],
   },
 ];
 

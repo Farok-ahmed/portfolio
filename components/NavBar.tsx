@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/libs/data";
 import { usePathname, useRouter } from "next/navigation";
+import Logo from "@/public/farok_ahmed_logo.png";
+import Image from "next/image";
 
 const NavBar = () => {
      const [isOpen, setIsOpen] = useState(false);
@@ -47,8 +49,19 @@ const NavBar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20">
-          <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">
-            Farok<span className="text-blue-500">Ahmed</span>
+          <a
+            href="#home"
+            onClick={(e) => scrollToSection(e, "#home")}
+            className="inline-flex items-center gap-3"
+            aria-label="Go to home"
+          >
+            <Image
+              src={Logo}
+              alt="Farok Ahmed"
+              className="h-9 w-9 rounded"
+              priority
+            />
+            
           </a>
 
           {/* Desktop Nav */}

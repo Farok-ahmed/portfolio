@@ -98,8 +98,6 @@ const Hero = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600" />
               </div>
 
               <div className="absolute -z-10 -inset-8 bg-gradient-to-r from-blue-200/50 to-purple-200/50 blur-2xl rounded-[2rem]" />
